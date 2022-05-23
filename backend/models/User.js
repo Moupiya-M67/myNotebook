@@ -20,5 +20,5 @@ const UserSchema = new Schema({
     }
 });
 const User =  mongoose.model('user', UserSchema); // user -> model name UserSchema -> The schema we are loading
-//User.createIndexes();
+//User.createIndexes(); // By this we cannot create duplicate values which are needed to be unique [Eg:email shoulb be unique]
 module.exports = User;

@@ -4,7 +4,7 @@ import noteContext from '../context/notes/noteContext';
 import AddNote from './AddNote';
 import Noteitem from './Noteitem';
 
-const Notes = () => {
+const Notes = (props) => {
     const context = useContext(noteContext);
     const {notes, getNotes, editNote} = context; // Destructuring and bringing the comtext's notes and setNotes' value here and storing in these notes and setNotes
 
@@ -17,7 +17,7 @@ const Notes = () => {
     const handleClick = (e) => {
         editNote(note.id, note.etitle, note.edescription, note.etag);
         refClose.current.click();
-        //props.showAlert("Updated successfully","success");
+        props.showAlert("Updated successfully","success");
     }
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const Notes = () => {
     return (
         <>
             {/* Add note component - Contains Title, Description and Tag client side */}
-            <AddNote />
+            <AddNote showAlert={props.showAlert} />
 
             <button type="button" ref={ref} className="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal">
                 Launch demo modal
@@ -83,7 +83,7 @@ const Notes = () => {
                 </div>
                 
                 {notes.map((note) => {
-                    return <Noteitem key={note._id} updateNote={updateNote} note={note} />
+                    return <Noteitem key={note._id} showAlert={props.showAlert} updateNote={updateNote} note={note} />
                 })}
             </div>
         </>

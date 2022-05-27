@@ -2,7 +2,7 @@ import React from 'react'
 import { useContext, useState } from 'react';
 import noteContext from '../context/notes/noteContext';
 
-const AddNote = () => {
+const AddNote = (props) => {
 
     const context = useContext(noteContext);
     const {addNote} = context; // Destructuring and bringing the comtext's addNote value here and storing in this addNote
@@ -13,7 +13,7 @@ const AddNote = () => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
         setNote({title: "", description: "", tag: ""})
-        //props.showAlert("Added successfully","success");
+        props.showAlert("Added successfully","success");
     }
 
     const onChange = (e) => {

@@ -1,11 +1,15 @@
 import React from 'react'
 import { useState, useContext, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import noteContext from '../context/notes/noteContext';
 import AddNote from './AddNote';
 import Noteitem from './Noteitem';
 
 const Notes = (props) => {
     const context = useContext(noteContext);
+
+    let navigate = useNavigate();
+
     const {notes, getNotes, editNote} = context; // Destructuring and bringing the comtext's notes and setNotes' value here and storing in these notes and setNotes
 
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
@@ -21,6 +25,14 @@ const Notes = (props) => {
     }
 
     useEffect(() => {
+        // if(localStorage.getItem('token'))
+        if(localStorage.getItem('auth-token'))
+        {
+            getNotes();
+        }
+        else{
+            navigate("/login");
+        }
         getNotes();
         //eslint-disable-next-line
     }, [])
